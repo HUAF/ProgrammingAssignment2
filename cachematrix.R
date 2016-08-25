@@ -6,13 +6,13 @@
 
 
 ## makeCacheMatrix takes an invertible matrix as argument, caching the
-## matrix and binding setters and getters for the matrix and the inverted matrix
+## matrix and binding setters and getters for the matrix and the inverse matrix
 
 makeCacheMatrix <- function(invertibleMatrix = matrix()) {
-    ## set invertedMatrix to NULL
+    ## set inverseMatrix to NULL
     inverseMatrix <- NULL
-    ## sets the invertibleMatrix value and the invertedMatrix to NULL 
-    ## (if the value of the matrix changes its inverted matrix changes too)
+    ## sets the invertibleMatrix value and the inverseMatrix to NULL 
+    ## (if the value of the matrix changes its inverse matrix changes too)
     set <- function(y) {
         invertibleMatrix <<- y
         inverseMatrix <<- NULL
