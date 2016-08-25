@@ -1,23 +1,28 @@
-## Put comments here that give an overall description of what your
-## functions do
+## makeCacheMatrix create a matrix object and its methods
+## it can store a matrix, its inverse and the setters and getters
+## cacheSolve takes a makeCacheMatrix object as argument,
+## returns the cached inverse matrix if it exists or 
+## computes the inverse matrix and cache it.
 
-## Write a short comment describing this function
+
 ## makeCacheMatrix takes an invertible matrix as argument, caching the
 ## matrix and binding setters and getters for the matrix and the inverted matrix
 
-makeCacheMatrix <- function(x = matrix()) {
+makeCacheMatrix <- function(invertibleMatrix = matrix()) {
     ## set invertedMatrix to NULL
-    m <- NULL
+    inverseMatrix <- NULL
     ## sets the invertibleMatrix value and the invertedMatrix to NULL 
     ## (if the value of the matrix changes its inverted matrix changes too)
     set <- function(y) {
-        x <<- y
-        m <<- NULL
+        invertibleMatrix <<- y
+        inverseMatrix <<- NULL
     }
-    ## getter
-    get <- function() x
-    setInverse <- function(solve) m <<- solve
-    getInverse <- function() m
+    ## return the invertible matrix
+    get <- function() invertibleMatrix
+    ## set the inverse matrix
+    setInverse <- function(solve) inverseMatrix <<- solve
+    ## returns the inverse matrix
+    getInverse <- function() inverseMatrix
     list(set = set, get = get, setInverse = setInverse, getInverse = getInverse)
 
 }
@@ -25,15 +30,15 @@ makeCacheMatrix <- function(x = matrix()) {
 
 ## Write a short comment describing this function
 
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
-    m <- x$getInverse()
-    if(!is.null(m)) {
+cacheSolve <- function(invertibleMatrix, ...) {
+        ## Return a matrix that is the inverse of 'invertibleMatrix'
+    inverseMatrix <- invertibleMatrix$getInverse()
+    if(!is.null(inverseMatrix)) {
         message("getting cached inverse matrix")
-        return(m)
+        return(inverseMatrix)
     }
-    data <-x$get()
-    m <- solve(data)
-    x$setInverse(m)
-    m
+    data <-invertibleMatrix$get()
+    inverseMatrix <- solve(data)
+    invertibleMatrix$setInverse(inverseMatrix)
+    inverseMatrix
 }
